@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { characterActions } from "../_actions";
+import { connect } from "react-redux";
+
+import { Label, InnerColumn } from "./style";
 
 const HomePage = (props) => {
+  const [character, setCharacter] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   let display;
-  function test() {
-    console.log("test");
+  function handleSubmit(e) {
+    props.generateCharacter();
   }
 
-  function generateCharacter(options) {
-    event.preventDefault();
-    console.log(options.target.outerText);
-  }
   return (
-    <div css={""}>
+    <div>
       <div css={"width:100%;height:60px;"}></div>
       <div css={"display:flex;"}>
         <div
@@ -19,83 +21,63 @@ const HomePage = (props) => {
             "width:25%;text-align:center;display:flex; justify-content:center;"
           }
         >
-          <div
-            css={
-              "width:90%; background:#1f1f1f;display:flex;flex-direction:column; align-items:center;"
-            }
-          >
-            <h2 css={"color:#fff;"}>Options</h2>
+          <InnerColumn css={""}>
+            <h2>Options</h2>
             <form
-              onSubmit={(e) => generateCharacter(e)}
               css={
                 "display:flex;flex-direction:column;align-items:center;width:70%;"
               }
             >
-              <label css={"color:#fff;"} htmlFor="">
-                option1
-              </label>
+              <Label htmlFor="">Mode</Label>
 
               <select name="option1" id="">
-                <option value="volvo">Volvo</option>
+                <option value="default">default</option>
               </select>
-              <label css={"color:#fff;"} htmlFor="option2">
-                option2
-              </label>
-              <select name="option2" id="">
-                <option value="volvo">Volvo</option>
-              </select>
-              <label css={"color:#fff;"} htmlFor="option3">
-                option3
-              </label>
-              <select name="option3" id="">
-                <option value="volvo">Volvo</option>
-              </select>
-              <label css={"color:#fff;"} htmlFor="option4">
-                option4
-              </label>
-              <select name="option4" id="">
-                <option value="volvo">Volvo</option>
-              </select>
-              <label css={"color:#fff;"} htmlFor="option5">
-                option5
-              </label>
-              <select name="option5" id="">
-                <option value="volvo">Volvo</option>
-              </select>
-              <div>
-                <input
-                  type="submit"
-                  css={
-                    "margin-top:30px;border-radius:50%;height:100px; width:100px; border:none; background:#a9d3a4;cursor:pointer"
-                  }
-                  value="Generate"
-                />
-              </div>
+
+              <div></div>
             </form>
-          </div>
+            <a
+              onClick={() => handleSubmit()}
+              css={
+                "margin-top:30px;border-radius:50%;height:100px; width:100px; border:none; background:#a9d3a4;cursor:pointer"
+              }
+            >
+              Generate
+            </a>
+          </InnerColumn>
         </div>
         <div
           css={
             "width:50%;text-align:center;display:flex;justify-content:center;"
           }
         >
-          <div css={"width:90%;height:300px; background:#1f1f1f; color:#fff;"}>
+          <InnerColumn>
             <h2>Your Character</h2>
             {display}
-          </div>
+          </InnerColumn>
         </div>
         <div
           css={
             "width:25%;text-align:center;display:flex;justify-content:center;"
           }
         >
-          <div css={"width:90%;height:300px; background:#1f1f1f;color:#fff;"}>
+          <InnerColumn>
             <h2>Links</h2>
-          </div>
+          </InnerColumn>
         </div>
       </div>
     </div>
   );
 };
 
-export { HomePage };
+const actions = {
+  generateCharacter: characterActions.generateCharacter,
+};
+
+function mapState(state) {
+  const { character } = state;
+  return { character };
+}
+
+const connectedHomePage = connect(mapState, actions)(HomePage);
+export { connectedHomePage as HomePage };

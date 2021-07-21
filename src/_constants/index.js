@@ -1,2 +1,1 @@
-export * from "./user.constants";
-export * from "./reference.constants";
+export * from "./character.constants";

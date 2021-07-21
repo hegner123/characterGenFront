@@ -1,0 +1,19 @@
+:root {
+  --dark-blue: #254456;
+  --green: #2a9d8f;
+  --yellow: #e9c46a;
+  --orange: #f4a261;
+  --red: #e76f51;
+  --white: #f1f6f9;
+  --dark: var(--dark-blue);
+  --light: var(--white);
+  --font: var(--dark-blue);
+  --accent: var(--red);
+  --accent2: var(--orange);
+  --accent3: var(--green);
+  --warn: var(--yellow);
+}
+
+h2 {
+  color: var(--light);
+}

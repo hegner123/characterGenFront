@@ -1,10 +1,5 @@
-import { combineReducers } from "redux";
-import { authentication } from "./authentication.reducer";
-import { registration } from "./registration.reducer";
+import { characterGenerator } from "./character.reducer";
 
-const rootReducer = combineReducers({
-  authentication,
-  registration,
-});
+const rootReducer = characterGenerator;
 
 export default rootReducer;
